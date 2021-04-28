@@ -1,3 +1,5 @@
+/** Database setup for books api. */
+
 const {Client} = require('pg');
 const {getDatabaseUri}=require('./config');
 

@@ -1,0 +1,23 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "required": [],
+    "properties": {
+        "book_id": {
+            "type": "integer"
+        },
+        "name": {
+            "type": "string"
+        },
+        "author": {
+            "type": "string"
+            
+        },
+        "cover": {
+            "type": "string"
+        
+        }
+    },
+    "additionalProperties": false
+}

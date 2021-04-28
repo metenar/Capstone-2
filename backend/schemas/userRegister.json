@@ -1,0 +1,56 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    
+    "examples": [
+        {
+            "username": "metenar",
+            "email": "metenar@gmail.com",
+            "password": "qweased",
+            "first_name": "Mete",
+            "last_name": "Nar",
+            "image": "https://google.com"
+        }
+    ],
+    "required": [
+        "username",
+        "email",
+        "password",
+        "first_name",
+        "last_name",
+        "image"
+    ],
+    "properties": {
+        "username": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+        },
+        "email": {
+            "type": "string",
+            "minLength": 6,
+            "maxLength": 60,
+            "format": "email"
+        },
+        "password": {
+            "type": "string",
+            "minLength": 5,
+            "maxLength": 20
+        },
+        "first_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+        },
+        "last_name": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 30
+        },
+        "image": {
+            "type": "string"            
+        }
+    },
+    "additionalProperties": true
+}
