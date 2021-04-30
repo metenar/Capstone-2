@@ -1,6 +1,6 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
-// const { sqlForPartialUpdate } = require("../helpers/sql");
+const { sqlForPartialUpdate } = require("../helpers/sql");
 const {
   NotFoundError,
   BadRequestError,
@@ -55,7 +55,7 @@ class User {
    **/
 
   static async register(
-      { username, password, firstName, lastName, email, image }) {
+      { username, password, first_name, last_name, email, image }) {
     const duplicateCheck = await db.query(
           `SELECT username
            FROM users
@@ -82,8 +82,8 @@ class User {
         [
           username,
           hashedPassword,
-          firstName,
-          lastName,
+          first_name,
+          last_name,
           email,
           image,
         ],

@@ -6,10 +6,17 @@ const cors=require('cors');
 const app=express();
 const { NotFoundError }=require('./expressError');
 const morgan=require('morgan');
+const usersRoutes = require("./routes/users");
+const authRoutes = require("./routes/auth");
+const { authenticateJWT } = require("./middleware/auth");
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(morgan('tiny'));
+app.use(authenticateJWT);
+app.use("/auth", authRoutes);
+app.use("/users", usersRoutes);
 
 /** Handle 404 errors -- this matches everything */
 
