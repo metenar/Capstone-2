@@ -26,7 +26,7 @@ router.post("/add", async function (req, res, next) {
 
 /** GET /[id] => { book }
  *
- * Returns { name, author,cover }
+ * Returns { name, author, cover, page_count }
  *
  * Authorization required: login
  **/

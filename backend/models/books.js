@@ -14,21 +14,23 @@ class Books {
    **/
 
   static async add(
-      { id, name, author, cover }) {
+      { id, name, author, cover, page_count }) {
 
     const result = await db.query(
           `INSERT INTO books
            (id,
             name,
             author,
-            cover)
-           VALUES ($1, $2, $3, $4)
-           RETURNING name, author, cover `,
+            cover,
+            page_count)
+           VALUES ($1, $2, $3, $4, $5)
+           RETURNING name, author, cover, page_count AS totalPages `,
         [
           id,
           name,
           author,
           cover,
+          page_count
         ],
     );
 
@@ -39,7 +41,7 @@ class Books {
 
   /** Given a id, return data about book.
    *
-   * Returns { name, author, cover}
+   * Returns { name, author, cover, page_count}
    *
    * Throws NotFoundError if book is not found.
    **/
@@ -49,7 +51,8 @@ class Books {
           `SELECT id,
                   name,
                   author,
-                  cover
+                  cover,
+                  page_count
            FROM books
            WHERE id = $1`,
         [id]

@@ -13,17 +13,17 @@ class MyBooks {
    *
    * Returns { book_id, status, rating, finished_date, progress }
    *
-   * Throws BadRequestError on duplicates.
+   * Throws NotFoundError if no such user.
    **/
 
   static async add(
-      { username, book_id, status, rating, finished_date, progress }) {
+      { book_id, status, rating, finished_date, progress },username) {
         const userCheck=await db.query(
           `SELECT username FROM users
           WHERE username=$1`,[username]);
         const user=userCheck.rows[0];
         if (!user) throw new NotFoundError(`No such user with username: ${username}`);
-      const result = await db.query(
+        const result = await db.query(
           `INSERT INTO my_books
             (username,
             book_id,
@@ -58,10 +58,9 @@ class MyBooks {
   static async get(username) {
     const MyBookRes = await db.query(
           `SELECT m.book_id,
-                  m.username,
                   b.author,
                   b.cover,
-                  m.status,
+                  m.current_status,
                   m.rating,
                   m.finished_date,
                   m.progress
@@ -70,11 +69,11 @@ class MyBooks {
         [username]
     );
 
-    const MyBook = MyBookRes.rows[0];
+    const MyBooks = MyBookRes.rows;
 
-    if (!MyBook) throw new NotFoundError(`No MyBook: ${username}`);
+    if (!MyBooks) throw new NotFoundError(`No MyBook: ${username}`);
 
-    return MyBook;
+    return MyBooks;
   }
 
   /** Update my_book data with `data`.
@@ -83,7 +82,7 @@ class MyBooks {
    * all the fields; this only changes provided ones.
    *
    * Data can include:
-   *   { status, rating, finished_date, progress }
+   *   { current_status, rating, finished_date, progress }
    *
    * Returns { book_id, status, rating, finished_date, progress }
    *
@@ -91,27 +90,29 @@ class MyBooks {
    *
    */
 
-   static async update(book_id, data) {
+   static async update(book_id, username,data) {
+     console.log(username)
 
     const { setCols, values } = sqlForPartialUpdate(
         data,
         {
-          status: "status",
+          current_status: "current_status",
           rating: "rating",
           finished_date: "finished_date",
           progress: "progress",
         });
     const book_idVarIdx = "$" + (values.length + 1);
+    const usernameIdx="$" + (values.length+2);
 
     const querySql = `UPDATE my_books 
                       SET ${setCols} 
-                      WHERE book_id = ${book_idVarIdx} 
+                      WHERE book_id = ${book_idVarIdx} AND username=${usernameIdx}
                       RETURNING book_id,
-                                status,
+                                current_status,
                                 rating,
                                 finished_date,
                                 progress`;
-    const result = await db.query(querySql, [...values, book_id]);
+    const result = await db.query(querySql, [...values, book_id,username]);
     const MyBook = result.rows[0];
 
     if (!MyBook) throw new NotFoundError(`No book: ${book_id}`);
@@ -119,13 +120,13 @@ class MyBooks {
   }
 
   /** Delete book using book_id from MyBook table; returns undefined. */
-  static async remove(book_id) {
+  static async remove(book_id,username) {
     let result = await db.query(
           `DELETE
            FROM my_books
-           WHERE book_id = $1
+           WHERE book_id = $1 AND username=$2
            RETURNING book_id`,
-        [book_id],
+        [book_id,username],
     );
     const MyBook = result.rows[0];
 

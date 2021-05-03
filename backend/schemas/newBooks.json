@@ -6,7 +6,8 @@
         "id",
         "name",
         "author",
-        "cover"
+        "cover",
+        "page_count"
     ],
     "properties": {
         "id": {
@@ -20,8 +21,10 @@
             
         },
         "cover": {
-            "type": "string"
-        
+            "type": "string"       
+        },
+        "page_count":{
+            "type":"integer"
         }
     },
     "additionalProperties": false

@@ -3,6 +3,7 @@ const router = express.Router();
 const { ensureLoggedIn} = require("../middleware/auth");
 const jsonschema = require("jsonschema");
 const MyBooks = require("../models/MyBooks");
+const Books = require("../models/books");
 const { BadRequestError } = require("../expressError");
 const MyBooksUpdateSchema = require("../schemas/MyBooksUpdate.json");
 const MyBooksSchema = require("../schemas/MyBooks.json");
@@ -15,7 +16,9 @@ router.post("/add", async function (req, res, next) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
           }         
-          const newMyBook = await MyBooks.add({...req.body});
+          const newMyBook = await MyBooks.add({...req.body},res.locals.user.username);
+          const book= await Books.get(req.body.book_id)
+          newMyBook.progress=`%${(newMyBook.progress/book.page_count*100).toFixed(2)}`
       return res.status(201).json( newMyBook );
     } catch (err) {
       return next(err);
@@ -38,26 +41,28 @@ router.post("/add", async function (req, res, next) {
     }
   });
 
-  /** PATCH /[username] { user } => { user }
+  /** PATCH /[book_id] { book } => { edited book }
  *
  * Data can include:
- *   { firstName, lastName, password, email }
+ *   { current_status, rating, finished_date, progress }
  *
- * Returns { username, firstName, lastName, email, isAdmin }
+ * Returns { book_id, current_status, rating, finished_date, progress }
  *
  * Authorization required: login
  **/
 
-router.patch("/:username",ensureLoggedIn, async function (req, res, next) {
+router.patch("/:book_id",ensureLoggedIn, async function (req, res, next) {
     try {
-      const validator = jsonschema.validate(req.body, userUpdateSchema);
+      const validator = jsonschema.validate(req.body, MyBooksUpdateSchema);
       if (!validator.valid) {
         const errs = validator.errors.map(e => e.stack);
         throw new BadRequestError(errs);
       }
   
-      const user = await User.update(req.params.username, req.body);
-      return res.json({ user });
+      const MyBook = await MyBooks.update(req.params.book_id,res.locals.user.username, req.body);
+      const book= await Books.get(req.params.book_id)
+          MyBook.progress=`%${(MyBook.progress/book.page_count*100).toFixed(2)}`
+      return res.json({ MyBook });
     } catch (err) {
       return next(err);
     }
@@ -70,7 +75,7 @@ router.patch("/:username",ensureLoggedIn, async function (req, res, next) {
 
 router.delete("/:book_id",ensureLoggedIn, async function (req, res, next) {
     try {
-      await MyBooks.remove(req.params.book_id);
+      await MyBooks.remove(req.params.book_id,res.locals.user.username);
       return res.json({ deleted: req.params.book_id });
     } catch (err) {
       return next(err);
