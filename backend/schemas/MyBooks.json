@@ -5,10 +5,7 @@
     "required": [
         "username",
         "book_id",
-        "status",
-        "rating",
-        "date",
-        "progress"
+        "current_status"
     ],
     "properties": {
         "username": {
@@ -17,7 +14,7 @@
         "book_id": {
             "type": "integer"
         },
-        "status": {
+        "current_status": {
             "type": "string"
         },
         "rating": {

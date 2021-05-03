@@ -4,19 +4,24 @@
     "type": "object",
     "required": [],
     "properties": {
+        "username": {
+            "type": "string"
+        },
         "book_id": {
             "type": "integer"
         },
-        "name": {
+        "status": {
             "type": "string"
         },
-        "author": {
+        "rating": {
             "type": "string"
-            
         },
-        "cover": {
-            "type": "string"
-        
+        "finished_date": {
+            "type": "string",
+            "format": "date"
+        },
+        "progress": {
+            "type": "number"
         }
     },
     "additionalProperties": false

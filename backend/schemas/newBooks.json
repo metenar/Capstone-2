@@ -3,13 +3,13 @@
     "$id": "http://example.com/example.json",
     "type": "object",
     "required": [
-        "book_id",
+        "id",
         "name",
         "author",
         "cover"
     ],
     "properties": {
-        "book_id": {
+        "id": {
             "type": "integer"
         },
         "name": {
