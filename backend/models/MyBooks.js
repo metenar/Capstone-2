@@ -17,7 +17,7 @@ class MyBooks {
    **/
 
   static async add(
-      { book_id, status, rating, finished_date, progress },username) {
+      { book_id, current_status, rating, finished_date, progress },username) {
         const userCheck=await db.query(
           `SELECT username FROM users
           WHERE username=$1`,[username]);
@@ -36,7 +36,7 @@ class MyBooks {
         [
             username,
             book_id,
-            status,
+            current_status,
             rating,
             finished_date,
             progress
@@ -50,7 +50,7 @@ class MyBooks {
 
   /** Given a username, return data about Mybook.
    *
-   * Returns { username, author, cover, status, rating, finished_date, progress}
+   * Returns { author, cover, current_status, rating, finished_date, progress}
    *
    * Throws NotFoundError if book is not found.
    **/
@@ -58,6 +58,7 @@ class MyBooks {
   static async get(username) {
     const MyBookRes = await db.query(
           `SELECT m.book_id,
+                  b.name,
                   b.author,
                   b.cover,
                   m.current_status,
@@ -67,6 +68,33 @@ class MyBooks {
            FROM my_books AS m JOIN books AS b ON m.book_id=b.id
            WHERE m.username = $1`,
         [username]
+    );
+
+    const MyBooks = MyBookRes.rows;
+
+    if (!MyBooks) throw new NotFoundError(`No MyBook: ${username}`);
+
+    return MyBooks;
+  }
+  /** Given a status, return data about Mybook.
+   *
+   * Returns { author, cover, rating, finished_date, progress}
+   *
+   * Throws NotFoundError if book is not found.
+   **/
+  static async get(current_status,username) {
+    const MyBookRes = await db.query(
+          `SELECT m.book_id,
+                  b.name,
+                  b.author,
+                  b.cover,
+                  b.page_count,
+                  m.rating,
+                  m.finished_date,
+                  m.progress
+           FROM my_books AS m JOIN books AS b ON m.book_id=b.id
+           WHERE m.username = $1 AND m.current_status = $2`,
+        [username, current_status]
     );
 
     const MyBooks = MyBookRes.rows;
