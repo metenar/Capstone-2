@@ -34,6 +34,7 @@ router.post("/add", async function (req, res, next) {
  **/
 
  router.get("/:username", ensureLoggedIn, async function (req, res, next) {
+   console.log(req.params.username)
     try {
       const myBook = await MyBooks.get(req.params.username);
       return res.json({ myBook });
@@ -42,7 +43,7 @@ router.post("/add", async function (req, res, next) {
     }
   });
 
-/** GET /[current_status] => { booklist of same status}
+/** GET /status/[current_status] => { booklist of same status}
  *
  * Returns { book_id, name, author, cover, 
  *           rating, finished_date,progress}
@@ -60,7 +61,7 @@ router.post("/add", async function (req, res, next) {
 			} else {
 				status="Want to Read";
 			}
-      const myBooks = await MyBooks.get(status, res.locals.user.username);
+      const myBooks = await MyBooks.getStatus(status, res.locals.user.username);
 			myBooks.map(MyBook=>MyBook.progress=`%${(MyBook.progress/MyBook.page_count*100).toFixed(2)}`)
       return res.json({ myBooks });
     } catch (err) {

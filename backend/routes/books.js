@@ -34,6 +34,7 @@ router.post("/add", async function (req, res, next) {
  router.get("/:id", ensureLoggedIn, async function (req, res, next) {
     try {
       const book = await Books.get(req.params.id);
+      console.log(book)
       return res.json({ book });
     } catch (err) {
       return next(err);

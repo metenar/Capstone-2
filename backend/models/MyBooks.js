@@ -82,7 +82,7 @@ class MyBooks {
    *
    * Throws NotFoundError if book is not found.
    **/
-  static async get(current_status,username) {
+  static async getStatus(current_status,username) {
     const MyBookRes = await db.query(
           `SELECT m.book_id,
                   b.name,
