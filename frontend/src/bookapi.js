@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://www.googleapis.com/books/v1/";
-const API_KEY = "AIzaSyCZdRHV_YvbNTa45jON0LQS2AU081neA7o";
+const API_KEY = "";
 
 /** API Class.
  *
