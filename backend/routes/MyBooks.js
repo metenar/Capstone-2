@@ -89,7 +89,7 @@ router.patch("/:book_id",ensureLoggedIn, async function (req, res, next) {
   
       const MyBook = await MyBooks.update(req.params.book_id,res.locals.user.username, req.body);
       const book= await Books.get(req.params.book_id)
-          MyBook.progress=`%${(MyBook.progress/book.page_count*100).toFixed(2)}`
+          MyBook.progress=(MyBook.progress/book.page_count*100).toFixed(2)
       return res.json({ MyBook });
     } catch (err) {
       return next(err);

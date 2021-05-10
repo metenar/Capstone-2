@@ -66,7 +66,7 @@ class MyBooks {
                   m.finished_date,
                   m.progress
            FROM my_books AS m JOIN books AS b ON m.book_id=b.id
-           WHERE m.username = $1`,
+           WHERE m.username = $1 ORDER BY m.current_status`,
         [username]
     );
 

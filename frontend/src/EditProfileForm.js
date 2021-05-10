@@ -47,7 +47,7 @@ const EditProfileForm=({save})=>{
             password  : '',
             image : currentUser.image
         },
-        validate,
+        validate, 
         onSubmit      : async (values,actions) => {
           try {
             let res=await save(currentUser.username,values);

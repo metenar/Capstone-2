@@ -1,0 +1,18 @@
+.Finished{
+    background-color: bisque;
+}
+.Reading{
+    background-color:coral;
+}
+.WantToRead{
+    background-color: green;
+}
+
+.BookCard a{
+    text-decoration: none;
+    color:black
+}
+.BookCard a:hover{
+    text-decoration: none;
+    color:blue
+}

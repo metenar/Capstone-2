@@ -36,7 +36,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.books (
-    id integer NOT NULL,
+    id text NOT NULL,
     name text NOT NULL,
     author text NOT NULL,
     cover text,
@@ -51,7 +51,7 @@ CREATE TABLE public.books (
 CREATE TABLE public.my_books (
     id integer NOT NULL,
     username text NOT NULL,
-    book_id integer NOT NULL,
+    book_id text NOT NULL,
     current_status public.status,
     rating text,
     finished_date text,

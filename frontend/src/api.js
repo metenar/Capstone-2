@@ -36,17 +36,24 @@ class BookApi {
 
   static async getBook(id) {
     let res = await this.request(`books/${id}`);
+    console.log(res.book)
     return res.book;
   }
-
+  static async addBook(data){
+      let res=await this.request(`books/add`, data,"post")
+      return res.book;
+  }
   static async getBooksByStatus(status) {
     let res = await this.request(`mybooks/status/${status}`);
     return res.myBooks;
   }
-
+  static async addBookToMyBook(data){
+      let res=await this.request(`mybooks/add`,data,"post");
+      return res.myBooks;
+  }
   static async getMyBooks(username) {
     let res = await this.request(`mybooks/${username}`);
-    return res.myBooks;
+    return res.myBook;
   }
 
   static async updateMyBook(book_id,updateData){

@@ -11,7 +11,7 @@
             "type": "string"
         },
         "book_id": {
-            "type": "integer"
+            "type": "string"
         },
         "current_status": {
             "type": "string"
