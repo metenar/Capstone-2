@@ -76,6 +76,22 @@ class MyBooks {
 
     return MyBooks;
   }
+
+  static async getByBookId(book_id,username) {
+    console.log(book_id,username)
+    const MyBookRes = await db.query(
+          `SELECT book_id
+           FROM my_books WHERE book_id=$1 AND username=$2`,
+        [book_id,username]
+    );
+
+    const MyBook = MyBookRes.rows[0];
+
+    if (!MyBook) throw new NotFoundError(`No Book: ${book_id}`);
+
+    return MyBook;
+  }
+
   /** Given a status, return data about Mybook.
    *
    * Returns { author, cover, rating, finished_date, progress}

@@ -33,15 +33,24 @@ router.post("/add", async function (req, res, next) {
  * Authorization required: login
  **/
 
- router.get("/:username", ensureLoggedIn, async function (req, res, next) {
-   console.log(req.params.username)
+ router.get("/", ensureLoggedIn, async function (req, res, next) {
     try {
-      const myBook = await MyBooks.get(req.params.username);
+      const myBook = await MyBooks.get(res.locals.user.username);
       return res.json({ myBook });
     } catch (err) {
       return next(err);
     }
   });
+
+  router.get("/:book_id", ensureLoggedIn, async function (req, res, next) {
+     try {
+       console.log(req.params.book_id,res.locals.user.username)
+       const myBook = await MyBooks.getByBookId(req.params.book_id,res.locals.user.username);
+       return res.json( myBook );
+     } catch (err) {
+       return next(err);
+     }
+   });
 
 /** GET /status/[current_status] => { booklist of same status}
  *

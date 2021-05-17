@@ -6,7 +6,7 @@ import Home from "./Home";
 import EditProfileForm from "./EditProfileForm"
 import LoginForm from "./LoginForm"
 import MyBooksList from "./MyBooksList"
-import SignUpForm from "./SignUpForm"
+import SignUpForm from "./SignUpForm";
 import NavBar from "./NavBar";
 import jwt from "jsonwebtoken";
 import useLocalStorageState from "./hooks/useLocalStorageState"
@@ -108,7 +108,7 @@ async function signup(data){
           username:currentUser.username,
           book_id:data.id,
           current_status:status,
-          rating:data.volumeInfo.averageRating.toString()
+          rating:(data.volumeInfo.averageRating.toString() || 0)
         }
         await BookApi.addBook(bookData);
         await BookApi.addBookToMyBook(myBookData);
@@ -117,7 +117,6 @@ async function signup(data){
       }
     }  
   }
-
   async function update(username,data){
     try {
       delete data.username;
@@ -127,9 +126,8 @@ async function signup(data){
         data.progress=+data.progress;
       } else {
         data.progress=100;
-        data.progress=+data.progress;
+        // data.progress=+data.progress;
       }
-      console.log(data)
       await BookApi.updateMyBook(username,data);
       return {success:true}
     } catch (e) {
@@ -169,6 +167,9 @@ if(!isDataLoaded) return <h3>Loading</h3>
             </Route>
             <Route exact path='/books/:id'>
               <BookDetails />
+            </Route>
+            <Route>
+              <p>Hmmm. I can't seem to find what you want.</p>
             </Route>
           </Switch>
         </main>

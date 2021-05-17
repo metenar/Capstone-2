@@ -13,6 +13,12 @@ const MyBookCard=({book})=>{
   } else {
     status="WantToRead"
   }
+  let finDate=""
+  let date=false;
+  if(book.current_status==="Finished" && book.finished_date) {
+    date=true;
+    finDate=new Date(book.finished_date).toLocaleDateString();
+  }
     return (
       <section className="BookCard">
       <Card>
@@ -33,7 +39,7 @@ const MyBookCard=({book})=>{
             <Link to={`mybooks/${book.current_status}`}>
             {book.current_status}
             </Link>
-            {book.current_status==="Finished" && <p>Finished Date: {book.finished_date}</p>}
+            {date && <p>Finished Date: {finDate}</p>}
             </Card.Footer>
           </Card>
           </section>

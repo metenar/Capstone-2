@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://www.googleapis.com/books/v1/";
-const API_KEY = "AIzaSyCZdRHV_YvbNTa45jON0LQS2AU081neA7o";
+const API_KEY = process.env.API_KEY;
 
 /** API Class.
  *
@@ -31,7 +31,7 @@ class GoogleBookApi {
 /** Get books by search. */
 
 static async getBooksBySearch(query) {
-    let books = await this.request(`volumes?q=${query}&orderBy=newest&key=${API_KEY}`);
+    let books = await this.request(`volumes?q=${query}&orderBy=newest&maxResults=20&key=${API_KEY}`);
     console.log(books)
     return books.items;
   }

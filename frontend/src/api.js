@@ -51,8 +51,13 @@ class BookApi {
       let res=await this.request(`mybooks/add`,data,"post");
       return res.myBooks;
   }
-  static async getMyBooks(username) {
-    let res = await this.request(`mybooks/${username}`);
+  static async getMyBooks() {
+    let res = await this.request(`mybooks`);
+    return res.myBook;
+  }
+
+  static async getMyBooksById(book_id) {
+    let res = await this.request(`mybooks/${book_id}`);
     return res.myBook;
   }
 

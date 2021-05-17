@@ -25,7 +25,7 @@ const BooksList=()=>{
                 <h3>Books</h3>
                 <SearchForm search={search}/>
                 {books.map(book=>
-                   <BookCard book={book} key={book.id}/>
+                   <BookCard book={book} userBooks={currentUser.library} key={book.id}/>
                 )}
             </div>
         )

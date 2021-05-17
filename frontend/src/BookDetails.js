@@ -39,7 +39,7 @@ const BookDetails=()=>{
     return (
         <div className="col-md-8 offset-md-2">
             <h3>Book details</h3>
-            <DetailsCard book={book}/>
+            <DetailsCard book={book} userBooks={currentUser.library}/>
 
         </div>
     )
