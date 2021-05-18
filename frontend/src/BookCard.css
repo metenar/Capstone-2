@@ -32,3 +32,19 @@
     text-decoration: none;
     color:blue
 }
+
+.BookCard-description {
+    white-space: nowrap; 
+    width: 100%; 
+    overflow: hidden;
+    text-overflow: ellipsis; 
+}
+.BookCard-description-visible{  
+    overflow: visible;
+}
+
+.read-button{
+    border: none;
+    background-color: white;
+    font-size: x-small;
+}

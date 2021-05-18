@@ -50,7 +50,8 @@ class MyBooks {
 
   /** Given a username, return data about Mybook.
    *
-   * Returns { author, cover, current_status, rating, finished_date, progress}
+   * Returns { book_id, name, author, cover, current_status, rating, 
+   *          categories, description, finished_date, progress}
    *
    * Throws NotFoundError if book is not found.
    **/
@@ -61,6 +62,8 @@ class MyBooks {
                   b.name,
                   b.author,
                   b.cover,
+                  b.description,
+                  b.categories,
                   m.current_status,
                   m.rating,
                   m.finished_date,
@@ -94,7 +97,8 @@ class MyBooks {
 
   /** Given a status, return data about Mybook.
    *
-   * Returns { author, cover, rating, finished_date, progress}
+   * Returns { book_id, name, author, cover, page_count, 
+   *        categories, description, rating, finished_date, progress}
    *
    * Throws NotFoundError if book is not found.
    **/
@@ -105,6 +109,8 @@ class MyBooks {
                   b.author,
                   b.cover,
                   b.page_count,
+                  b.description,
+                  b.categories,
                   m.rating,
                   m.finished_date,
                   m.progress

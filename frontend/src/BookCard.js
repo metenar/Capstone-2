@@ -11,6 +11,7 @@ import {
 const BookCard=({book,userBooks})=>{
   const {addBookToMyBooks}=useContext(CurrentUserContext);
   const [dropdownOpen, setOpen] = useState(false);
+  const [visible,setVisible]= useState(false)
   const history = useHistory();
   const toggle = () => setOpen(!dropdownOpen);
   const res=userBooks.find(obj => {
@@ -22,21 +23,28 @@ const BookCard=({book,userBooks})=>{
     addBookToMyBooks(book,status);
     history.push('/mybooks')
   }
+  const handleRead=()=>setVisible(!visible);
     return (
       <section className="BookCard">
         <Card>
-          <Link to={`books/${book.id}`}>
-            <CardBody>
+          <CardBody>
+            <Link to={`books/${book.id}`}>
               <CardTitle>
                 {book.volumeInfo.title}
                 {book.volumeInfo.imageLinks && <img style={{width:'100px'}}src={book.volumeInfo.imageLinks.smallThumbnail}
                 alt={book.volumeInfo.title}
                 className="float-left ml-5" />}
               </CardTitle>
-              {book.volumeInfo.authors && <p><small>by {book.volumeInfo.authors.map(author=>author)}</small></p>}
+              {book.volumeInfo.authors && <p><small>by {book.volumeInfo.authors.map(author=>author)}</small></p>} 
+            </Link> 
+              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.volumeInfo.description}</small></p> 
+              <button 
+                onClick={handleRead}
+                className="read-button">
+                {visible ? "Read Less" : "Read More..."}</button>          
               </CardBody>
-            </Link>
             <CardFooter>
+            <span className="float-left ml-5 text-muted">Categories: {book.volumeInfo.categories}</span>
             <ButtonDropdown 
               isOpen={dropdownOpen} 
               toggle={toggle}

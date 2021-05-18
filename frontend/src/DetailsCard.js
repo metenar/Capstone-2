@@ -8,10 +8,14 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 import { Card } from "react-bootstrap";
 
 const DetailsCard=({book,userBooks})=>{
+  console.log(book)
+  const [visible,setVisible]= useState(false)
     const {addBookToMyBooks}=useContext(CurrentUserContext);
     const [dropdownOpen, setOpen] = useState(false);
     const history = useHistory();
     const toggle = () => setOpen(!dropdownOpen);
+    var options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+    let publishedDate=new Date(book.published_date).toLocaleDateString("en-US", options);
     const res=userBooks.find(obj => {
         return obj.book_id === book.id
     })
@@ -21,6 +25,7 @@ const DetailsCard=({book,userBooks})=>{
         addBookToMyBooks(book,status);
         history.push('/mybooks')
     }
+    const handleRead=()=>setVisible(!visible);
     return (
       <section className="BookCard">
       <Card>
@@ -33,9 +38,16 @@ const DetailsCard=({book,userBooks})=>{
               </Card.Title>
               {book.author && <p><small>by {book.author}</small></p>}
               {book.rating && <p>Rating: {book.rating}</p>}
+              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/<br>/g,' ')}</small></p> 
+              <button 
+                onClick={handleRead}
+                className="read-button">
+                {visible ? "Read Less" : "Read More..."}</button>
+              <p>Publisher: {book.publisher},  Published Date: {publishedDate}</p>
               <p>Total Page: {book.page_count}</p>
             </Card.Body>
             <Card.Footer>
+            <span id="categories" className="float-left ml-5 text-muted">Categories: {book.categories}</span>
             <ButtonDropdown 
               isOpen={dropdownOpen} 
               toggle={toggle}
@@ -48,19 +60,16 @@ const DetailsCard=({book,userBooks})=>{
               <DropdownMenu>
                 <DropdownItem header>Status</DropdownItem>
                 <DropdownItem 
-                  disabled={hasIt}
                   className="WantToRead"
                   onClick={()=>handleStatus("Want to Read")}
                 >Want to Read</DropdownItem>
                 <DropdownItem
                   onClick={()=>handleStatus("Finished")}
                   className="Finished"
-                  disabled={hasIt}
                 >Finished</DropdownItem>
                 <DropdownItem
                   onClick={()=>handleStatus("Reading")}
                   className="Reading"
-                  disabled={hasIt}
                 >Reading</DropdownItem>
                 </DropdownMenu>
               </ButtonDropdown>  

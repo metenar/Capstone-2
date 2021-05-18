@@ -27,7 +27,7 @@ router.post("/add", async function (req, res, next) {
 
 /** GET /[username] => { MyBook}
  *
- * Returns { username, book_id, name, author, cover, 
+ * Returns { username, book_id, name, author, cover, description, categories
  *          current_status, rating, finished_date, progress }
  *
  * Authorization required: login
@@ -44,7 +44,6 @@ router.post("/add", async function (req, res, next) {
 
   router.get("/:book_id", ensureLoggedIn, async function (req, res, next) {
      try {
-       console.log(req.params.book_id,res.locals.user.username)
        const myBook = await MyBooks.getByBookId(req.params.book_id,res.locals.user.username);
        return res.json( myBook );
      } catch (err) {
@@ -54,7 +53,7 @@ router.post("/add", async function (req, res, next) {
 
 /** GET /status/[current_status] => { booklist of same status}
  *
- * Returns { book_id, name, author, cover, 
+ * Returns { book_id, name, author, cover, description, categories
  *           rating, finished_date,progress}
  *
  * Authorization required: login

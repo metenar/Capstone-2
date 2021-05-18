@@ -17,12 +17,17 @@ const BookDetails=()=>{
             } catch (e) {
                 if(e){
                     let book=await GoogleBookApi.getBooksById(id);
+                    console.log(book)
                     let bookData={
                         id:book.id,
                         name:book.volumeInfo.title,
                         cover:book.volumeInfo.imageLinks.smallThumbnail,
                         author:book.volumeInfo.authors.toString(),
-                        page_count:book.volumeInfo.pageCount
+                        page_count:book.volumeInfo.pageCount,
+                        publisher:book.volumeInfo.publisher,
+                        published_date:book.volumeInfo.publishedDate,
+                        description:book.volumeInfo.description,
+                        categories:book.volumeInfo.categories.toString()
                     }
                     await BookApi.addBook(bookData)
                     let mbook=await BookApi.getBook(id)

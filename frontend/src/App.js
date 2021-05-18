@@ -102,7 +102,11 @@ async function signup(data){
           name:data.volumeInfo.title,
           cover:data.volumeInfo.imageLinks.smallThumbnail,
           author:data.volumeInfo.authors.toString(),
-          page_count:data.volumeInfo.pageCount
+          page_count:data.volumeInfo.pageCount,
+          publisher:data.volumeInfo.publisher,
+          published_date:data.volumeInfo.publishedDate,
+          description:data.volumeInfo.description,
+          categories:data.volumeInfo.categories.toString()
         }
         let myBookData={
           username:currentUser.username,

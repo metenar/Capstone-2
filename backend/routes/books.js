@@ -16,7 +16,6 @@ router.post("/add", async function (req, res, next) {
           }
           
           const newBook = await Books.add({...req.body});
-          console.log(validator.valid)
       return res.status(201).json( newBook );
     } catch (err) {
       return next(err);
@@ -26,7 +25,8 @@ router.post("/add", async function (req, res, next) {
 
 /** GET /[id] => { book }
  *
- * Returns { name, author, cover, page_count }
+ * Returns { name, author, cover, page_count, 
+ *      publisher, published_date, description, categories }
  *
  * Authorization required: login
  **/
@@ -34,7 +34,6 @@ router.post("/add", async function (req, res, next) {
  router.get("/:id", ensureLoggedIn, async function (req, res, next) {
     try {
       const book = await Books.get(req.params.id);
-      console.log(book)
       return res.json({ book });
     } catch (err) {
       return next(err);

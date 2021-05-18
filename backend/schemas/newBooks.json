@@ -17,14 +17,26 @@
             "type": "string"
         },
         "author": {
-            "type": "string"
-            
+            "type": "string"           
         },
         "cover": {
             "type": "string"       
         },
         "page_count":{
             "type":"integer"
+        },
+        "publisher":{
+            "type":"string"
+        },
+        "published_date":{
+            "type":"string",
+            "format": "date"
+        },
+        "description":{
+            "type":"string"
+        },
+        "categories":{
+            "type":"string"
         }
     },
     "additionalProperties": false

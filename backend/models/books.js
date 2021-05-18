@@ -8,13 +8,15 @@ class Books {
 
   /** Add book with data.
    *
-   * Returns { name, author, cover }
+   * Returns { name, author, cover, publisher, 
+   *        published_date, description,  categories }
    *
    * Throws BadRequestError on duplicates.
    **/
 
   static async add(
-      { id, name, author, cover, page_count }) {
+      { id, name, author, cover, page_count, 
+        publisher, published_date, description, categories}) {
 
     const result = await db.query(
           `INSERT INTO books
@@ -22,15 +24,24 @@ class Books {
             name,
             author,
             cover,
-            page_count)
-           VALUES ($1, $2, $3, $4, $5)
-           RETURNING name, author, cover, page_count AS totalPages `,
+            page_count,
+            publisher,
+            published_date,
+            description,
+            categories)
+           VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+           RETURNING name, author, cover, page_count AS totalPages, 
+                publisher, published_date, description, categories`,
         [
           id,
           name,
           author,
           cover,
-          page_count
+          page_count,
+          publisher,
+          published_date,
+          description,
+          categories
         ],
     );
 
@@ -41,7 +52,8 @@ class Books {
 
   /** Given a id, return data about book.
    *
-   * Returns { name, author, cover, page_count}
+   * Returns { name, author, cover, page_count, publisher, 
+   *          published_date, description, categories}
    *
    * Throws NotFoundError if book is not found.
    **/
@@ -52,7 +64,11 @@ class Books {
                   name,
                   author,
                   cover,
-                  page_count
+                  page_count,
+                  publisher,
+                  published_date,
+                  description,
+                  categories
            FROM books
            WHERE id = $1`,
         [id]
