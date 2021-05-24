@@ -46,7 +46,7 @@ const MyBookCard=({book})=>{
           <Link to={`mybooks/${book.current_status}`}>
           {book.current_status}
           </Link>
-            <span id="categories" className="float-left ml-5 text-muted">Categories: {book.categories}</span>
+            <span id="categories" className="float-left ml-5">Categories: {book.categories}</span>
             {date && <p>Finished Date: {finDate}</p>}
           </Card.Footer>
         </Card>

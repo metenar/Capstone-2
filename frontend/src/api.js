@@ -36,7 +36,6 @@ class BookApi {
 
   static async getBook(id) {
     let res = await this.request(`books/${id}`);
-    console.log(res.book)
     return res.book;
   }
   static async addBook(data){
@@ -86,14 +85,20 @@ class BookApi {
     return res.user
   }
 
-//   static async applyJob(username,id){
-//     await this.request(`users/${username}/jobs/${id}`,{},"post")
-//   }
-  // obviously, you'll add a lot here ...
-}
+  static async deleteFromMybooks(book_id){
+    let res=await this.request(`mybooks/${book_id}`,{}, "delete")
+    return res.deleted
+  }
 
-// for now, put token ("testuser" / "password" on class)
-// JoblyApi.token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-//     "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-//     "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
+  static async getBooksFromApi(query){
+    let res=await this.request(`api/search/${query}`);
+    return res;
+  }
+
+  static async getBooksFromApiById(id){
+    let res=await this.request(`api/${id}`);
+    return res;
+  }
+
+}
 export default BookApi;

@@ -19,6 +19,7 @@ import UpdateMyBookForm from "./UpdateMyBookForm";
 function App() {
   const [currentUser,setCurrentUser]=useState(null);
   const [isDataLoaded,setIsDataLoaded]=useState(false);
+  const [myBooks,setMyBooks]=useState(null);
   const [token,setToken]=useLocalStorageState("token");
   useEffect(()=>{
     async function getCurrentUser(){
@@ -28,7 +29,7 @@ function App() {
       BookApi.token=token
       let currentUser=await BookApi.getCurrentUser(username);
       let library=await BookApi.getMyBooks(username)
-      currentUser.library=library
+      setMyBooks(library)
       setCurrentUser(currentUser)
     } catch (e){
       console.error("error loading",e)
@@ -106,16 +107,17 @@ async function signup(data){
           publisher:data.volumeInfo.publisher,
           published_date:data.volumeInfo.publishedDate,
           description:data.volumeInfo.description,
-          categories:data.volumeInfo.categories.toString()
+          categories:(data.volumeInfo.categories ? data.volumeInfo.categories.toString() : "Missing")
         }
         let myBookData={
           username:currentUser.username,
           book_id:data.id,
           current_status:status,
-          rating:(data.volumeInfo.averageRating.toString() || 0)
+          rating:(data.volumeInfo.avarageRating ? data.volumeInfo.averageRating.toString() : "0" )
         }
         await BookApi.addBook(bookData);
         await BookApi.addBookToMyBook(myBookData);
+        updateLibrary();
         console.error("failed",e)
         return {success:false}
       }
@@ -127,16 +129,30 @@ async function signup(data){
       let book=await BookApi.getBook(data.book_id);
       if(data.current_status!=="Finished"){
         data.progress=(+data.progress/book.page_count*100).toFixed(2);
-        data.progress=+data.progress;
+        data.progress= +data.progress;
       } else {
         data.progress=100;
-        // data.progress=+data.progress;
       }
       await BookApi.updateMyBook(username,data);
+      updateLibrary()
       return {success:true}
     } catch (e) {
       console.error("failed",e)
       return {success:false}
+    }
+  }
+  async function updateLibrary(){
+    const library=await BookApi.getMyBooks(currentUser.username);
+    setMyBooks(library);
+  }
+  async function remove(book_id){
+    try {
+      await BookApi.deleteFromMybooks(book_id);
+      updateLibrary();
+      return {success:true}
+    } catch (e) {
+      console.error("failed",e)
+      return {success:false}      
     }
   }
 
@@ -144,7 +160,7 @@ if(!isDataLoaded) return <h3>Loading</h3>
   return (
     <div className="App">
     <BrowserRouter>
-      <CurrentUserContext.Provider value={{currentUser,addBookToMyBooks}}>
+      <CurrentUserContext.Provider value={{currentUser,myBooks,addBookToMyBooks}}>
         <NavBar logout={logout}/>
         <main>
           <Switch>
@@ -167,7 +183,7 @@ if(!isDataLoaded) return <h3>Loading</h3>
               <UpdateMyBookForm update={update} />
             </Route>
             <Route exact path='/mybooks/:status'>
-              <StatusList />
+              <StatusList remove={remove}/>
             </Route>
             <Route exact path='/books/:id'>
               <BookDetails />

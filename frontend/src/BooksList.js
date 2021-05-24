@@ -1,5 +1,5 @@
 import React,{useState,useEffect,useContext} from "react";
-import GoogleBookApi from "./bookapi"
+import BookApi from "./api"
 import { Redirect } from "react-router-dom";
 import BookCard from "./BookCard"
 import SearchForm from "./SearchForm";
@@ -8,12 +8,12 @@ import CurrentUserContext from "./CurrentUserContext"
 
 const BooksList=()=>{
     const [books,setBooks]=useState([]);
-    const {currentUser}=useContext(CurrentUserContext)
+    const {currentUser,myBooks}=useContext(CurrentUserContext)
     useEffect(()=>{
         search()
     },[])
     async function search(query="war"){
-        let books=await GoogleBookApi.getBooksBySearch(query);
+        let books=await BookApi.getBooksFromApi(query);
         setBooks(books)
     }
     if(!books) return <h3>Loading...<i className="fas fa-4x fa-spinner fa-spin" /></h3>
@@ -25,7 +25,7 @@ const BooksList=()=>{
                 <h3>Books</h3>
                 <SearchForm search={search}/>
                 {books.map(book=>
-                   <BookCard book={book} userBooks={currentUser.library} key={book.id}/>
+                   <BookCard book={book} userBooks={myBooks} key={book.id}/>
                 )}
             </div>
         )

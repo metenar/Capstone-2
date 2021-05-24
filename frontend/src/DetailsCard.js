@@ -8,8 +8,7 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem
 import { Card } from "react-bootstrap";
 
 const DetailsCard=({book,userBooks})=>{
-  console.log(book)
-  const [visible,setVisible]= useState(false)
+    const [visible,setVisible]= useState(false)
     const {addBookToMyBooks}=useContext(CurrentUserContext);
     const [dropdownOpen, setOpen] = useState(false);
     const history = useHistory();
@@ -47,7 +46,7 @@ const DetailsCard=({book,userBooks})=>{
               <p>Total Page: {book.page_count}</p>
             </Card.Body>
             <Card.Footer>
-            <span id="categories" className="float-left ml-5 text-muted">Categories: {book.categories}</span>
+            <span id="categories" className="float-left ml-5">Categories: {book.categories}</span>
             <ButtonDropdown 
               isOpen={dropdownOpen} 
               toggle={toggle}

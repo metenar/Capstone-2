@@ -18,8 +18,8 @@ const validate = values => {
 const UpdateMyBookForm=({update})=>{
     
     const {book_id} =useParams();
-    const {currentUser}=useContext(CurrentUserContext)
-    let data=currentUser.library.find(book=>book.book_id===book_id)
+    const {currentUser,myBooks}=useContext(CurrentUserContext)
+    let data=myBooks.find(book=>book.book_id===book_id)
     let initials={}
     if (data.current_status==="Finished"){
         initials.username=currentUser.username
@@ -101,7 +101,7 @@ const UpdateMyBookForm=({update})=>{
                             {formik.touched.finished_date && formik.errors.finished_date ? <div className="alert alert-danger">{formik.errors.finished_date}</div>:null}
                         </FormGroup>)
                         }
-                        {formik.values.current_status!=="Finished" && (<FormGroup>
+                        {(formik.values.current_status!=="Finished" && formik.values.current_status!=="Want to Read") && (<FormGroup>
                             <Label for="progress">Progress </Label>
                             <Input 
                                 type="text"

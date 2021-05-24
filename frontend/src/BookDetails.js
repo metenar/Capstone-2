@@ -3,12 +3,11 @@ import BookApi from "./api"
 import {useParams,Redirect} from "react-router-dom";
 import DetailsCard from "./DetailsCard"
 import CurrentUserContext from "./CurrentUserContext"
-import GoogleBookApi from "./bookapi";
 
 const BookDetails=()=>{
     const {id}=useParams();
     const [book,setBook]=useState(null)
-    const {currentUser}=useContext(CurrentUserContext)
+    const {currentUser,myBooks}=useContext(CurrentUserContext)
     useEffect(()=>{
         async function getBook() {
             try {
@@ -16,7 +15,7 @@ const BookDetails=()=>{
                 setBook(book);
             } catch (e) {
                 if(e){
-                    let book=await GoogleBookApi.getBooksById(id);
+                    let book=await BookApi.getBooksFromApiById(id);
                     console.log(book)
                     let bookData={
                         id:book.id,
@@ -44,7 +43,7 @@ const BookDetails=()=>{
     return (
         <div className="col-md-8 offset-md-2">
             <h3>Book details</h3>
-            <DetailsCard book={book} userBooks={currentUser.library}/>
+            <DetailsCard book={book} userBooks={myBooks}/>
 
         </div>
     )

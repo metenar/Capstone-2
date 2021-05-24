@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {Link} from "react-router-dom";
+import {Link, useHistory} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import "./ReadingCard.css"
 import { Card } from "react-bootstrap";
 
-const ReadingCard=({book,status})=>{
-  const [visible,setVisible]= useState(false)
+const ReadingCard=({book,status,remove})=>{
+  const [visible,setVisible]= useState(false);
+  const history = useHistory();
   let current_status='';
   if (status==="Reading"){
     current_status="Reading";
@@ -19,6 +20,10 @@ const ReadingCard=({book,status})=>{
   if(current_status==="Finished" && book.finished_date) {
     date=true;
     finDate=new Date(book.finished_date).toLocaleDateString();
+  }
+  async function handleDelete(id){
+    await remove(id);
+    history.push('/mybooks')
   }
   const handleRead=()=>setVisible(!visible);
     return (
@@ -38,7 +43,7 @@ const ReadingCard=({book,status})=>{
             </Link>
               <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description}</small></p> 
               <button 
-                onClick={handleRead}
+                onClick={()=>handleRead(book.book_id)}
                 className="read-button">
                 {visible ? "Read Less" : "Read More..."}</button>
             </Card.Body>
@@ -47,12 +52,16 @@ const ReadingCard=({book,status})=>{
             {current_status}
             
             {date && <p>Finished Date: {finDate}</p>}
-            <span id="categories" className="float-left ml-5 text-muted">Categories: {book.categories}</span>
+            <span id="categories" className="float-left ml-5">Categories: {book.categories}</span>
             <Link to={`update/${book.book_id}`}
                 className="btn btn-primary float-right" 
                 >
-                Update
-              </Link>
+                Update Status
+            </Link>
+            <button 
+                onClick={()=>handleDelete(book.book_id)}
+                className="btn btn-danger float-right">
+                Delete</button>
             </Card.Footer>
           </Card>
           </section>

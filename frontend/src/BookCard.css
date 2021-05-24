@@ -1,27 +1,27 @@
 .disabled{
     background-color: rgba(255,0,0,10);
-    border-radius: 10%;
+
     color:white;
 }
 .active{
     background-color: rgba(0,0,255,10);
-    border-radius: 10%;
+
     color:white;
 }
 .Finished:hover{
     background-color: bisque;
-    border-radius: 10%;
-    color:white
+
+    color:white;
 }
-.Reading:hover{
+.Reading{
     background-color:coral;
-    border-radius: 10%;
-    color:white
+
+    color:white;
 }
 .WantToRead:hover{
     background-color: green;
-    border-radius: 10%;
-    color:white
+
+    color:white;
 }
 
 .BookCard a{

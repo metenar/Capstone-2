@@ -19,9 +19,6 @@ function NavBar({logout}) {
               <NavLink to="/mybooks">My Books</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink to="/books">Books</NavLink>
-            </NavItem>
-            <NavItem>
               <NavLink to="/profile">Profile</NavLink>
             </NavItem>
             <NavItem>

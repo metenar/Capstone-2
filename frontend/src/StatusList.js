@@ -6,7 +6,7 @@ import ReadingCard from "./ReadingCard"
 import 'bootstrap/dist/css/bootstrap.css';
 import CurrentUserContext from "./CurrentUserContext"
 
-const StatusList=()=>{
+const StatusList=({remove})=>{
     const {status}=useParams();
     let cnvrtedstatus='';
     if (status==="Finished"){
@@ -34,7 +34,7 @@ const StatusList=()=>{
                 <h3>{status} Books</h3>
                 
                 {books.map(book=>
-                   <ReadingCard book={book} status={status} key={book.book_id}/>
+                   <ReadingCard book={book} remove={remove} status={status} key={book.book_id}/>
                 )}
             </div>
         )

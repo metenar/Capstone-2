@@ -9,7 +9,8 @@ const morgan=require('morgan');
 const usersRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
 const booksRoutes = require('./routes/books')
-const MyBooksRoutes = require('./routes/MyBooks')
+const MyBooksRoutes = require('./routes/MyBooks');
+const apiRoutes= require('./routes/api');
 const { authenticateJWT } = require("./middleware/auth");
 
 app.use(cors());
@@ -21,6 +22,7 @@ app.use("/auth", authRoutes);
 app.use("/users", usersRoutes);
 app.use("/books",booksRoutes);
 app.use('/mybooks',MyBooksRoutes);
+app.use('/api',apiRoutes);
 
 /** Handle 404 errors -- this matches everything */
 
