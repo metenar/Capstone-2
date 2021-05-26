@@ -9,7 +9,7 @@
     color:white;
 }
 .Finished:hover{
-    background-color: bisque;
+    background-color: tan;
 
     color:white
 }
@@ -18,10 +18,14 @@
 
     color:white
 }
-.WantToRead:hover{
-    background-color: green;
+.WantToRead .update a{
+    background-color: #007bff;
 
     color:white
+}
+.WantToRead:hover{
+    color:white;
+    text-decoration: none; 
 }
 
 .BookCard a{
@@ -29,8 +33,8 @@
     color:black
 }
 .BookCard a:hover{
-    text-decoration: none;
-    color:blue
+    text-decoration: underline;
+    font-weight: bold;
 }
 
 .BookCard-description {

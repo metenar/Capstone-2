@@ -1,3 +1,6 @@
+.BookCard{
+    box-sizing: border-box;
+}
 .disabled{
     background-color: rgba(255,0,0,10);
 
@@ -9,17 +12,12 @@
     color:white;
 }
 .Finished:hover{
-    background-color: bisque;
+    background-color: tan;
 
     color:white;
 }
 .Reading{
     background-color:coral;
-
-    color:white;
-}
-.WantToRead:hover{
-    background-color: green;
 
     color:white;
 }
@@ -29,10 +27,17 @@
     color:black
 }
 .BookCard a:hover{
-    text-decoration: none;
-    color:blue
+    font-weight: bold;
+    text-decoration: underline;
 }
+.WantToRead{
+    background-color: green;
 
+    color:white;
+}
+.BookCard .WantToRead a{
+    color:white;
+}
 .BookCard-description {
     white-space: nowrap; 
     width: 100%; 
@@ -47,4 +52,7 @@
     border: none;
     background-color: white;
     font-size: x-small;
+}
+.card-footer{
+    background-color: rosybrown;
 }

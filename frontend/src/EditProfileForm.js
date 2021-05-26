@@ -37,7 +37,6 @@ const validate = values => {
 
 const EditProfileForm=({save})=>{
     const {currentUser}=useContext(CurrentUserContext)
-    console.log(currentUser)
     const formik = useFormik({
         initialValues : {
             username  : currentUser.username,

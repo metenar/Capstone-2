@@ -17,7 +17,14 @@ class Books {
   static async add(
       { id, name, author, cover, page_count, 
         publisher, published_date, description, categories}) {
+    const duplicateCheck = await db.query(
+          `SELECT id
+           FROM books
+           WHERE id = $1`,
+      [id]);
 
+    if (duplicateCheck.rows[0])
+      throw new BadRequestError(`Duplicate book: ${id}`);
     const result = await db.query(
           `INSERT INTO books
            (id,
@@ -60,20 +67,19 @@ class Books {
 
   static async get(id) {
     const bookRes = await db.query(
-          `SELECT id,
-                  name,
-                  author,
-                  cover,
-                  page_count,
-                  publisher,
-                  published_date,
-                  description,
-                  categories
-           FROM books
-           WHERE id = $1`,
-        [id]
-    );
-
+      `SELECT id,
+      name,
+      author,
+      cover,
+      page_count,
+      publisher,
+      published_date,
+      description,
+      categories
+      FROM books
+      WHERE id = $1`,
+      [id]
+      );
     const book = bookRes.rows[0];
 
     if (!book) throw new NotFoundError(`No book: ${id}`);

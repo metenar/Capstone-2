@@ -1,8 +1,9 @@
 .Finished{
-    background-color: bisque;
+    background-color: tan;
 }
 .Reading{
     background-color:coral;
+    /* display: block; */
 }
 .WantToRead{
     background-color: green;
@@ -13,8 +14,9 @@
     color:black
 }
 .MyBookCard a:hover{
-    text-decoration: none;
-    color:blue
+    font-weight: bold;
+    text-decoration: underline;
+    
 }
 
 .MyBookCard-description {
@@ -33,5 +35,8 @@
     font-size: x-small;
 }
 #categories{
+    font-weight: bold;
+    width:100%;
+    /* display: flex; */
     color:white;
 }

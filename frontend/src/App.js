@@ -37,21 +37,24 @@ function App() {
     }
   }
   setIsDataLoaded(true)
-}
-setIsDataLoaded(false)
-getCurrentUser()
-},[token]);
-async function signup(data){
-  try{
-    let token=await BookApi.signup(data);
-    setToken(token)
-    return {success:true}
-    } catch (e){
-      console.error("failed",e)
-      return {success:false}
-    }
-    
   }
+  setIsDataLoaded(false)
+  getCurrentUser()
+  },[token]);
+  
+  /** Signing Up feature */
+  async function signup(data){
+    try{
+      let token=await BookApi.signup(data);
+      setToken(token)
+      return {success:true}
+      } catch (e){
+        console.error("failed",e)
+        return {success:false}
+      }   
+    }
+  
+  /** Login feature */
   async function login(data){
     try{
       let token=await BookApi.login(data)
@@ -62,10 +65,15 @@ async function signup(data){
       return {success:false}
     }
   }
+
+  /** Logout feature */
+
   function logout(){
     setCurrentUser(null)
     setToken(null)
   }
+  /** Update user profile feature */
+
   async function save(username,data){
     let profileData={
       first_name:data.first_name,
@@ -83,6 +91,7 @@ async function signup(data){
     }
   }
 
+  /** Adding Book to my_books table feature */
   async function addBookToMyBooks(data,status){
     
     //Checking is book in our database
@@ -94,6 +103,7 @@ async function signup(data){
         current_status:status
       }
       await BookApi.addBookToMyBook(myoldBookData);
+      updateLibrary();
       return {success:true}
     } catch (e){
       console.error("failed",e)
@@ -123,6 +133,9 @@ async function signup(data){
       }
     }  
   }
+
+  /** Updating my_books table feature */
+
   async function update(username,data){
     try {
       delete data.username;
@@ -141,10 +154,15 @@ async function signup(data){
       return {success:false}
     }
   }
+  /** Updating library helper function */
+
   async function updateLibrary(){
     const library=await BookApi.getMyBooks(currentUser.username);
     setMyBooks(library);
   }
+
+  /** Removing book from my_books table feature */
+
   async function remove(book_id){
     try {
       await BookApi.deleteFromMybooks(book_id);
@@ -156,47 +174,47 @@ async function signup(data){
     }
   }
 
-if(!isDataLoaded) return <h3>Loading</h3>
-  return (
-    <div className="App">
-    <BrowserRouter>
-      <CurrentUserContext.Provider value={{currentUser,myBooks,addBookToMyBooks}}>
-        <NavBar logout={logout}/>
-        <main>
-          <Switch>
-            <Route exact path='/'>
-              <Home />
-            </Route>
-            <Route exact path='/signup'>
-              <SignUpForm signup={signup}/>
-            </Route>
-            <Route exact path='/login'>
-              <LoginForm login={login}/>
-            </Route>
-            <Route exact path='/profile'>
-              <EditProfileForm save={save}/>
-            </Route>
-            <Route exact path='/mybooks'>
-              <MyBooksList />
-            </Route>
-            <Route exact path='/mybooks/update/:book_id'>
-              <UpdateMyBookForm update={update} />
-            </Route>
-            <Route exact path='/mybooks/:status'>
-              <StatusList remove={remove}/>
-            </Route>
-            <Route exact path='/books/:id'>
-              <BookDetails />
-            </Route>
-            <Route>
-              <p>Hmmm. I can't seem to find what you want.</p>
-            </Route>
-          </Switch>
-        </main>
-      </CurrentUserContext.Provider>
-    </BrowserRouter>
-    </div>
-  );
+  if(!isDataLoaded) return <h3>Loading</h3>
+    return (
+      <div className="App">
+      <BrowserRouter>
+        <CurrentUserContext.Provider value={{currentUser,myBooks,addBookToMyBooks}}>
+          <NavBar logout={logout}/>
+          <main>
+            <Switch>
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/signup'>
+                <SignUpForm signup={signup}/>
+              </Route>
+              <Route exact path='/login'>
+                <LoginForm login={login}/>
+              </Route>
+              <Route exact path='/profile'>
+                <EditProfileForm save={save}/>
+              </Route>
+              <Route exact path='/mybooks'>
+                <MyBooksList />
+              </Route>
+              <Route exact path='/mybooks/update/:book_id'>
+                <UpdateMyBookForm update={update} />
+              </Route>
+              <Route exact path='/mybooks/:status'>
+                <StatusList remove={remove}/>
+              </Route>
+              <Route exact path='/books/:id'>
+                <BookDetails />
+              </Route>
+              <Route>
+                <p>Hmmm. I can't seem to find what you want.</p>
+              </Route>
+            </Switch>
+          </main>
+        </CurrentUserContext.Provider>
+      </BrowserRouter>
+      </div>
+    );
 }
 
 export default App;

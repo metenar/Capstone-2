@@ -117,20 +117,6 @@ class User {
 
     if (!user) throw new NotFoundError(`No user: ${username}`);
 
-    // const userJobsRes=await db.query(
-    //   `SELECT j.id,j.title,j.company_handle,c.name AS company_name 
-    //   FROM jobs AS j JOIN companies AS c ON j.company_handle=c.handle
-    //   JOIN applications AS a ON a.job_id=j.id 
-    //   WHERE a.username=$1`,
-    //   [username]
-    // );
-    // let jobIds=[];
-    // const userJobs=userJobsRes.rows;
-    // for (let i=0;i<userJobs.length;i++){
-    //   jobIds.push(userJobs[i])
-    // }
-    // user.jobs=jobIds
-
     return user;
   }
 
@@ -140,15 +126,12 @@ class User {
    * all the fields; this only changes provided ones.
    *
    * Data can include:
-   *   { firstName, lastName, password, email, isAdmin }
+   *   { firstName, lastName, email, image }
    *
-   * Returns { username, firstName, lastName, email, isAdmin }
+   * Returns { username, firstName, lastName, email, image }
    *
    * Throws NotFoundError if not found.
    *
-   * WARNING: this function can set a new password or make a user an admin.
-   * Callers of this function must be certain they have validated inputs to this
-   * or a serious security risks are opened.
    */
 
   static async update(username, data) {
@@ -181,43 +164,6 @@ class User {
     delete user.password;
     return user;
   }
-
-/** Job Aplication Feature 
-* Given a username, and job id return applied the user to that job.
-*
-* Returns { applied:job_id }
-*
-* Throws NotFoundError if user not found, job is not found.
-* Throws BedRequestError if the user applied before the given job_id 
-*/
-//   static async applyToJob(username,jobId){
-//     // Checking the user and jobs are exist
-//     const userCheck=await db.query(
-//       `SELECT username FROM users
-//       WHERE username=$1`,[username]);
-//     const user=userCheck.rows[0];
-//     if (!user) throw new NotFoundError(`No such user with username: ${username}`);
-//     const jobCheck=await db.query(
-//       `SELECT id FROM jobs
-//       WHERE id=$1`,[jobId]);
-//     const job=jobCheck.rows[0];
-//     if (!job) throw new NotFoundError(`No such job with job_id: ${jobId}`);
-//     const checkUserAppliedBefore=await db.query(`
-//       SELECT username,job_id
-//       FROM applications
-//       WHERE username=$1 AND job_id=$2`,[username,jobId]);
-//     // Checking if the user applied the job before
-//     const dublicate=checkUserAppliedBefore.rows[0];
-//     if(dublicate) {
-//       throw new BadRequestError(`${username} has already applied to this job with id:${jobId}`);
-//     }
-//     // if everythings ok after checks write the date to table
-//     let applied=await db.query(`
-//     INSERT INTO applications (username, job_id)
-//     VALUES ($1,$2) RETURNING job_id`,
-//     [username,jobId]);
-//     return {applied:applied.rows[0].job_id}
-//   }
 
   /** Delete given user from database; returns undefined. */
 

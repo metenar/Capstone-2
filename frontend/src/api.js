@@ -9,6 +9,7 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
  */
 
 class BookApi {
+  
   // the token for interactive with the API will be stored here.
   static token;
 
@@ -38,66 +39,96 @@ class BookApi {
     let res = await this.request(`books/${id}`);
     return res.book;
   }
+
+  /** Add book to books table. */
+
   static async addBook(data){
       let res=await this.request(`books/add`, data,"post")
       return res.book;
   }
+
+  /** Get books from my_books table by status. */
+
   static async getBooksByStatus(status) {
     let res = await this.request(`mybooks/status/${status}`);
     return res.myBooks;
   }
+
+  /** Add book to my_books table. */
+
   static async addBookToMyBook(data){
       let res=await this.request(`mybooks/add`,data,"post");
       return res.myBooks;
   }
+
+  /** Get books list from my_books table. */
+
   static async getMyBooks() {
     let res = await this.request(`mybooks`);
     return res.myBook;
   }
+
+  /** Get book by id from my_books table. */
 
   static async getMyBooksById(book_id) {
     let res = await this.request(`mybooks/${book_id}`);
     return res.myBook;
   }
 
+  /** Update book by id from my_books table. */
+
   static async updateMyBook(book_id,updateData){
     let res=await this.request(`mybooks/${book_id}`,updateData,"patch")
     return res.MyBook
   }
 
-  static async signup(signupData){
-    let res=await this.request("auth/register",signupData,"post")
-    return res.token
-  }
-
-  static async login(loginData){
-    let res=await this.request("auth/token",loginData,"post")
-    return res.token
-  }
-
-  static async getCurrentUser(username){
-    let res=await this.request(`users/${username}`);
-    return res.user
-  }
-
-  static async update(username,updateData){
-    let res=await this.request(`users/${username}`,updateData,"patch")
-    return res.user
-  }
+  /** delete book by id from my_books table. */
 
   static async deleteFromMybooks(book_id){
     let res=await this.request(`mybooks/${book_id}`,{}, "delete")
     return res.deleted
   }
 
+  /** Get books from Google Books Api by query. */
+
   static async getBooksFromApi(query){
     let res=await this.request(`api/search/${query}`);
     return res;
   }
 
+  /** Get book from Google Books Api by book_id. */
+
   static async getBooksFromApiById(id){
     let res=await this.request(`api/${id}`);
     return res;
+  }
+
+  // User API routes
+  /** Sign up. */
+
+  static async signup(signupData){
+    let res=await this.request("auth/register",signupData,"post")
+    return res.token
+  }
+
+  /** Login. */
+
+  static async login(loginData){
+    let res=await this.request("auth/token",loginData,"post")
+    return res.token
+  }
+  /** Get current user by username from users table. */
+
+  static async getCurrentUser(username){
+    let res=await this.request(`users/${username}`);
+    return res.user
+  }
+
+  /** Update current user by username from users table. */
+
+  static async update(username,updateData){
+    let res=await this.request(`users/${username}`,updateData,"patch")
+    return res.user
   }
 
 }

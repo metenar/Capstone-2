@@ -9,6 +9,7 @@ ul{
 .nav-item {
   width: 190px;
   text-align: center;
+  margin: auto;
 }
 
 nav a {
@@ -20,7 +21,7 @@ nav a.active {
   color: #f0f2f5;
   font-weight: bold;
   background-color: black;
-  /* border-bottom: 2px solid; */
+  border-bottom: 2px solid;
   box-sizing: border-box;
 }
 

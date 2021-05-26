@@ -81,7 +81,6 @@ class MyBooks {
   }
 
   static async getByBookId(book_id,username) {
-    console.log(book_id,username)
     const MyBookRes = await db.query(
           `SELECT book_id
            FROM my_books WHERE book_id=$1 AND username=$2`,
@@ -141,7 +140,6 @@ class MyBooks {
    */
 
    static async update(book_id, username,data) {
-     console.log(username)
 
     const { setCols, values } = sqlForPartialUpdate(
         data,

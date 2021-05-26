@@ -10,12 +10,12 @@ const MyBooksSchema = require("../schemas/MyBooks.json");
 const db=require('../db');
 
 router.post("/add", async function (req, res, next) {
-    try {
+    try {       
         const validator = jsonschema.validate(req.body, MyBooksSchema);
         if (!validator.valid) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
-          }         
+          }
           const newMyBook = await MyBooks.add({...req.body},res.locals.user.username);
           const book= await Books.get(req.body.book_id)
           newMyBook.progress=`%${(newMyBook.progress/book.page_count*100).toFixed(2)}`

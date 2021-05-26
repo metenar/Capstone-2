@@ -14,7 +14,6 @@ router.post("/add", async function (req, res, next) {
             const errs = validator.errors.map(e => e.stack);
             throw new BadRequestError(errs);
           }
-          
           const newBook = await Books.add({...req.body});
       return res.status(201).json( newBook );
     } catch (err) {

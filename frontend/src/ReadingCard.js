@@ -47,14 +47,14 @@ const ReadingCard=({book,status,remove})=>{
                 className="read-button">
                 {visible ? "Read Less" : "Read More..."}</button>
             </Card.Body>
-            <Card.Footer className={current_status}>
+            <Card.Footer className={current_status==="Want To Read" ? "WantToRead" : current_status}>
             
             {current_status}
             
             {date && <p>Finished Date: {finDate}</p>}
             <span id="categories" className="float-left ml-5">Categories: {book.categories}</span>
             <Link to={`update/${book.book_id}`}
-                className="btn btn-primary float-right" 
+                className="btn btn-primary float-right update" 
                 >
                 Update Status
             </Link>
