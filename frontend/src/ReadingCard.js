@@ -41,7 +41,7 @@ const ReadingCard=({book,status,remove})=>{
               {book.rating && <p>Rating: {book.rating}</p>}
               {current_status==="Reading" && <p>Progress: {book.progress}</p>}
             </Link>
-              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description}</small></p> 
+              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/(<\/(i|br|p|b)>|<(br|i|p|b)>)/g,' ')}</small></p> 
               <button 
                 onClick={()=>handleRead(book.book_id)}
                 className="read-button">
