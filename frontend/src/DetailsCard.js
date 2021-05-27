@@ -29,15 +29,15 @@ const DetailsCard=({book,userBooks})=>{
       <section className="BookCard">
       <Card>
             <Card.Body>
+            {book.cover && <img style={{width:'100px'}}src={book.cover}
+            alt={book.name}
+            className="card-img ml-1" />}            
               <Card.Title>
                 {book.name}
-                {book.cover && <img style={{width:'100px'}}src={book.cover}
-                alt={book.name}
-                className="float-left ml-5" />}
               </Card.Title>
               {book.author && <p><small>by {book.author}</small></p>}
               {book.rating && <p>Rating: {book.rating}</p>}
-              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/<br>/g,' ')}</small></p> 
+              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/<.*>/g,' ')}</small></p> 
               <button 
                 onClick={handleRead}
                 className="read-button">

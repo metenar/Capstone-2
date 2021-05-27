@@ -52,3 +52,7 @@
     background-color: white;
     font-size: x-small;
 }
+
+.card-img{
+    margin-left: -50px;
+}

@@ -16,7 +16,6 @@ const BookDetails=()=>{
             } catch (e) {
                 if(e){
                     let book=await BookApi.getBooksFromApiById(id);
-                    console.log(book)
                     let bookData={
                         id:book.id,
                         name:book.volumeInfo.title,
