@@ -37,7 +37,7 @@ const DetailsCard=({book,userBooks})=>{
               </Card.Title>
               {book.author && <p><small>by {book.author}</small></p>}
               {book.rating && <p>Rating: {book.rating}</p>}
-              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/<.*>/g,' ')}</small></p> 
+              <p className={visible ? "BookCard-description-visible" : "BookCard-description"}><small>{book.description.replace(/(<\/(i|br|p|b)>|<(br|i|p|b)>)/g,' ')}</small></p> 
               <button 
                 onClick={handleRead}
                 className="read-button">
