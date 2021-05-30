@@ -5,6 +5,7 @@ import BooksList from "./BooksList"
 
 const Home=()=>{
     const {currentUser}=useContext(CurrentUserContext)
+    console.log(currentUser)
     return (
         <div className="text-center">
             <h1>Book API</h1>

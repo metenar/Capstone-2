@@ -36,7 +36,7 @@ const MyBookCard=({book})=>{
               {book.rating && <p>Rating: {book.rating}</p>}
               {book.current_status==="Reading" && <p>Progress: %{book.progress}</p>}
             </Link>
-              <p className={visible ? "MyBookCard-description-visible" : "MyBookCard-description"}><small>{book.description.replace(/(<\/(i|br|p|b)>|<(br|i|p|b)>)/g,' ')}</small></p> 
+              <p className={visible ? "MyBookCard-description-visible" : "MyBookCard-description"}><small>{book.description.replace(/(<(\/?)[a-zA-Z]+>)/g,' ')}</small></p> 
               <button 
                 onClick={handleRead}
                 className="read-button">

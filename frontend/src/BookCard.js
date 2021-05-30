@@ -44,7 +44,7 @@ const BookCard=({book,userBooks})=>{
                 {visible ? "Read Less" : "Read More..."}</button>          
               </CardBody>
             <CardFooter>
-            <span className="float-left ml-5">Categories: {book.volumeInfo.categories}</span>
+            <span className="float-left ml-5">Categories: {(book.volumeInfo.categories ? book.volumeInfo.categories : "Missing")}</span>
             <ButtonDropdown 
               isOpen={dropdownOpen} 
               toggle={toggle}

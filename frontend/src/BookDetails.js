@@ -25,7 +25,7 @@ const BookDetails=()=>{
                         publisher:book.volumeInfo.publisher,
                         published_date:book.volumeInfo.publishedDate,
                         description:book.volumeInfo.description,
-                        categories:book.volumeInfo.categories.toString()
+                        categories:(book.volumeInfo.categories ? book.volumeInfo.categories.toString() : "Missing")
                     }
                     await BookApi.addBook(bookData)
                     let mbook=await BookApi.getBook(id)

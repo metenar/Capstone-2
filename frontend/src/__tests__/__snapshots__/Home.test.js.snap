@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="text-center"
+  >
+    <h1>
+      Book API
+    </h1>
+    <p>
+       You can follow your library using easy steps.
+    </p>
+    <div>
+      <h3>
+        Welcome Back, 
+      </h3>
+      <img
+        alt="user avatar"
+        class="card-img rounded-circle user-img mt-2 ml-2 p-2"
+        style="width: 150px;"
+      />
+      <div
+        class="col-md-8 offset-md-2"
+      >
+        <h3>
+          Books
+        </h3>
+        <div
+          class="mb-2"
+        >
+          <form
+            class="form-inline"
+          >
+            <input
+              class="form-control  flex-grow-1 form-control"
+              name="term"
+              placeholder="Enter search term.."
+              type="text"
+              value=""
+            />
+            <button
+              class="btn btn-primary"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
