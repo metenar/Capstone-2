@@ -16,8 +16,9 @@ const validate = values => {
 
 
 const UpdateMyBookForm=({update})=>{
-    
+    console.log("Mete")
     const {book_id} =useParams();
+    console.log(book_id)
     const {currentUser,myBooks}=useContext(CurrentUserContext)
     let data=myBooks.find(book=>book.book_id===book_id)
     let initials={}
