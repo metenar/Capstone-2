@@ -1,5 +1,5 @@
 import { render,screen} from '@testing-library/react';
-import { BrowserRouter, Route, Switch} from "react-router-dom";
+import { MemoryRouter, Route, Switch} from "react-router-dom";
 import UpdateMyBookForm from '../UpdateMyBookForm';
 import '@testing-library/jest-dom'
 import CurrentUserContext from "../CurrentUserContext"
@@ -7,7 +7,7 @@ import CurrentUserContext from "../CurrentUserContext"
 function renderUpdate(currentUser,myBooks) {
 
     return render(
-        <BrowserRouter>
+        <MemoryRouter initialEntries={["mybooks/update/qw11t5"]}>
             <CurrentUserContext.Provider value={{currentUser,myBooks}}>
                 <Switch>
                     <Route exect path="/mybooks/update/:book_id">
@@ -15,7 +15,7 @@ function renderUpdate(currentUser,myBooks) {
                     </Route>
                 </Switch>
             </CurrentUserContext.Provider>
-        </BrowserRouter>
+        </MemoryRouter>
     );
   }
 
@@ -29,15 +29,15 @@ function renderUpdate(currentUser,myBooks) {
     }]
 
 test('renders without crushing', () => {
-  renderUpdate({currentUser:"metenar"},myBooks);
+  renderUpdate({username:"metenar"},myBooks);
 });
 
 test('should match the snapshot', () => {
-  const {asFragment}=renderUpdate({currentUser:"metenar"},myBooks);
+  const {asFragment}=renderUpdate({username:"metenar"},myBooks);
   expect(asFragment()).toMatchSnapshot()
 });
 
 test('should Book Status visible', ()=>{
-    renderUpdate({currentUser:"metenar"},myBooks);
-    expect(screen.queryByText(/metenar/i)).not.toBeNull();
+    renderUpdate({username:"metenar"},myBooks);
+    expect(screen.queryAllByText('qw11t5')).not.toBeNull();
 })

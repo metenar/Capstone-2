@@ -41,8 +41,6 @@ const validate = values => {
   };
 
 const SignUpForm=({signup})=>{
-    console.log("mete")
-    
     const history= useHistory();
     const formik = useFormik({
         initialValues : {

@@ -21,15 +21,15 @@ function renderHome(currentUser) {
 
 
 test('renders without crushing', () => {
-  renderHome({currentUser:"metenar"});
+  renderHome({username:"metenar"});
 });
 
 test('should match the snapshot', () => {
-  const {asFragment}=renderHome({currentUser:"metenar"});
+  const {asFragment}=renderHome({username:"metenar"});
   expect(asFragment()).toMatchSnapshot()
 });
 
 test('should welcome back visible', ()=>{
-    renderHome({currentUser:"metenar"});
+    renderHome({username:"metenar"});
     expect(screen.getByText(/Welcome Back/)).not.toBeNull();
 })

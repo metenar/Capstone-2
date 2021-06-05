@@ -91,8 +91,8 @@ class BookApi {
 
   /** Get books from Google Books Api by query. */
 
-  static async getBooksFromApi(query){
-    let res=await this.request(`api/search/${query}`);
+  static async getBooksFromApi(query,page){
+    let res=await this.request(`api/search/${query}/${page}`);
     return res;
   }
 

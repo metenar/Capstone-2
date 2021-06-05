@@ -35,14 +35,7 @@ function NavBar({logout}) {
           <NavLink exact to="/" className="navbar-brand">
             Book API
           </NavLink> 
-          <Nav className="ml-auto" navbar>
-            <NavItem>
-              <NavLink to="/login">Login</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/signup">SignUp</NavLink>
-            </NavItem>
-          </Nav>
+
         </Navbar>
       </div>
     );

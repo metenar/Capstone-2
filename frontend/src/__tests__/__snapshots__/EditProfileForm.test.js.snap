@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="col-md-4 m-auto"
+  >
+    <h2>
+      Profile
+    </h2>
+    <div
+      class="card card"
+    >
+      <div
+        class="card-body"
+      >
+        <form
+          class=""
+        >
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+            >
+              Username
+            </label>
+            <p
+              class="font-weight-bold"
+            />
+            <img
+              alt="user avatar"
+              class="card-img rounded-circle user-img mt-2 ml-2 p-2"
+              style="width: 100px;"
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+            >
+              First Name
+            </label>
+            <input
+              class="form-control"
+              name="first_name"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+            >
+              Last Name
+            </label>
+            <input
+              class="form-control"
+              name="last_name"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+            >
+              Email
+            </label>
+            <input
+              class="form-control"
+              name="email"
+              type="email"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+            >
+              Confirm password to make changes:
+            </label>
+            <input
+              class="form-control"
+              name="password"
+              type="password"
+              value=""
+            />
+          </div>
+          <div
+            class="form-group"
+          >
+            <label
+              class=""
+              for="image"
+            >
+              Avatar image 
+            </label>
+            <input
+              class="form-control"
+              id="image"
+              name="image"
+              placeholder="Enter your image"
+              type="text"
+              value=""
+            />
+          </div>
+          <div
+            class="text-success"
+          />
+          <button
+            class="btn btn-primary"
+            type="submit"
+          >
+            Save Changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

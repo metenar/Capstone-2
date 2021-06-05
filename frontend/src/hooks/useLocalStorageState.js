@@ -3,7 +3,6 @@ import {useState,useEffect} from "react";
 const useLocalStorageState=(key,initialValue=null)=>{
     const [state,setState]=useState(()=>{
         let value=(window.localStorage.getItem(key) || initialValue);
-        console.log(value)
         return value;
     })
     useEffect(()=>{
