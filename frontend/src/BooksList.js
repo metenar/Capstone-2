@@ -63,7 +63,7 @@ const BooksList=()=>{
                                 </PaginationItem>
                             )
                         }
-                        return "..."
+                        return "."
                     
                     })}
                     <PaginationItem disabled={currentPage === Math.ceil(total/20)-1}>
