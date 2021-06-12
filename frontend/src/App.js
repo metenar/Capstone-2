@@ -7,7 +7,7 @@ import EditProfileForm from "./EditProfileForm"
 import LoginForm from "./LoginForm"
 import MyBooksList from "./MyBooksList"
 import SignUpForm from "./SignUpForm";
-import NavBar from "./NavBar";
+import Navbar2 from "./Navbar2";
 import jwt from "jsonwebtoken";
 import useLocalStorageState from "./hooks/useLocalStorageState"
 import CurrentUserContext from "./CurrentUserContext"
@@ -179,7 +179,7 @@ function App() {
       <div className="App">
       <BrowserRouter>
         <CurrentUserContext.Provider value={{currentUser,myBooks,addBookToMyBooks}}>
-          <NavBar logout={logout}/>
+          <Navbar2 logout={logout}/>
           <main>
             <Switch>
               <Route exact path='/'>

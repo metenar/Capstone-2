@@ -1,7 +1,8 @@
 import React,{useContext} from "react";
 import CurrentUserContext from "./CurrentUserContext"
 import { Link } from "react-router-dom";
-import BooksList from "./BooksList"
+import BooksList from "./BooksList";
+import bookimage from "./lostbook.jpeg"
 
 const Home=()=>{
     const {currentUser}=useContext(CurrentUserContext)
@@ -17,6 +18,7 @@ const Home=()=>{
                 </div>
             )
         :(
+            <div>
             <p>
                 <Link className="btn btn-primary mr-3" to="/login">
                     Login
@@ -25,7 +27,10 @@ const Home=()=>{
                     SignUp
                 </Link>
             </p>
+            <img src={bookimage} alt="open book"/>
+            </div>
         )}
+        
         </div>
     )
 }
