@@ -1,70 +1,78 @@
-# Getting Started with Create React App
+# BookApi
+- Projects link [BookApi](https://mete-bookapi.surge.sh)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Pupose of the project 
+My website is light clone of GoodReads app.   
+I want to make my own library and act like GoodReads.   
 
-## Available Scripts
+# Features of the project.
+    1. Register,
+    2. Login,
+    3. Search Books Feature,
+    4. Add Books to user own library,
+    5. Create 3 shelves for own library named Reading, Finished, Want to Read.
+    6. Update the books in users own library,
+    7. Delete the books from users library,
+    Update the users profile,
+    8. Update the status of the books like progress
+    9. Get Detailed information for books.
 
-In the project directory, you can run:
+# Tests
+    All tests for backend is in the same directory where the testing file is.
 
-### `yarn start`
+    For frontend test is in the __Test__ directory.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+    to start the tests just use Test commend for each directory.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Standard user flow  
 
-### `yarn test`
+When you open my site the first page is;
+![Home Page](Untitled.jpg) 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+To start the process first you should SignUp.
+![SignUp](Signup.png)
 
-### `yarn build`
+If you are already signedUp then you can click login
+![Login](Login.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+When you logged in the first books list showed which is related about war.
+But you can search any book title 
+Site showed newest books first ordered. and first 20 books only.
+![BookList](booklist.jpg)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+If you want to see next 20 books you can click the page number at the bottom.
+![Pagination](BookListpagination.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+If you want to add any book to your library you can just click Add Library
+button and choose which shelves you want.(Reading, Finished, Want to Read)
 
-### `yarn eject`
+When you add a book to your library site redirect you to your books page  
+and shows recently added book.
+![MyBooks](Mybooks.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+If you have more then one book and if they are different shelves then you can clicked the link (Reading, Finished, Want to Read) and this link directed you related shelves and showes only these books.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+![BookStatus](Bookstatusreading.png)
+![BookStatusWTR](BookstatusWTR.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+If you want to delete or update the books you can click update or delete buttons.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+![Bookupdate](Bookstatusupdate.png)
 
-## Learn More
+You can update your progress or you can change the status of the book like finished.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+You can get more details about the book if you click on the book title 
+![BookDetail](Bookdetails.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+And lastly you can update your profile using profile button on navbar.
+![ProfileUpdate](Profileupdate.png)
 
-### Code Splitting
+# Technology Used
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+    1. Node Js,
+    2. React,
+    3. Reactstrap
 
-### Analyzing the Bundle Size
+ 
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
